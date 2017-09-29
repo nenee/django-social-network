@@ -1,0 +1,36 @@
+{% extends "social/base.html" %}
+
+{% block content %}
+<div class='main'>
+<h3>{{ greeting }} Profile</h3>
+
+{% if data.picture %}
+<div class='block'>
+    <img class='profile_pic' src='{{ data.picture.url }}' /><br style='clear:left;'><br>
+</div>
+{% endif %}
+<div class='block'>
+    {% if data.text %}
+    <strong>Bio: </strong>{{ data.text }} <br style='clear:left;'><br>
+    {% endif %}
+    
+    {% if data.phone %}
+    <strong>Phone: </strong>{{ data.phone }}<br style='clear:left;'><br>
+    {% endif %}
+
+    {% if data.country %}
+    <strong>Living on </strong>{{ data.country }}, {{ data.city }}  <br style='clear:left;'><br>
+    {% endif %}
+    
+    
+    {% if data.workplace %}
+    <strong>Workplace: </strong>{{ data.workplace }}<br style='clear:left;'><br>
+    {% endif %}
+</div>
+<br style='clear:left;'><br>
+
+<a class='button' href='/social/messages/?view={{ view_user }}'>View {{ greeting }} messages</a>
+<br>
+<br>
+</div>
+{% endblock %}

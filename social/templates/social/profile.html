@@ -1,0 +1,45 @@
+{% extends "social/base.html" %}
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class='main'>
+<h3>Your Profile</h3>
+{% if data.picture %}
+<div class='block'>
+    <img class='profile_pic' src='{{ data.picture.url }}' />
+</div>
+{% endif %}
+
+<form method='POST' action='/social/profile/' enctype='multipart/form-data'>
+  	{% csrf_token %}
+	<h3>Enter or edit your details and/or upload an image</h3>
+    
+    <label for='picture'>Picture (up to 800x600 and only gif, jpeg and png)</label>
+    <input name='picture' type='file' />
+
+    <label for='country'>Country: </label>
+    <input name='country' value='{{ data.country }}'/>
+    
+    <label for='city'>City: </label>
+    <input name='city' value='{{ data.city }}'/>
+    
+    <label for='phone'>Phone: </label>
+    <input name='phone' value='{{ data.phone }}'/>
+    
+    <label for='workplace'>Workplace: </label>
+    <input name='workplace' value='{{ data.workplace }}'/>
+    
+    <label for='text'>Description: </label>
+	<textarea name='text' cols='50' rows='3'>{{ data.text }}</textarea>
+	<br>
+   <input type='submit' value='Save Profile'>
+</form>
+</div>
+{% endblock %}
